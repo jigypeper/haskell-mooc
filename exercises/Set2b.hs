@@ -86,7 +86,9 @@ myGcd a b
 -- * you can compute the length of a string with the length function
 
 leftpad :: String -> Int -> String
-leftpad = todo
+leftpad a b
+    | length a >= b = a
+    | otherwise = leftpad (" " <> a) b
 
 ------------------------------------------------------------------------------
 -- Ex 5: let's make a countdown for a rocket! Given a number, you
@@ -102,7 +104,11 @@ leftpad = todo
 -- * you'll probably need a recursive helper function
 
 countdown :: Integer -> String
-countdown = todo
+countdown 0 = "Liftoff!"
+countdown x = "Ready! " ++ go x
+    where
+        go 0 = "Liftoff!"
+        go n = show n ++ "... " ++ go (n-1)
 
 ------------------------------------------------------------------------------
 -- Ex 6: implement the function smallestDivisor that returns the
@@ -120,7 +126,11 @@ countdown = todo
 -- Hint: remember the mod function!
 
 smallestDivisor :: Integer -> Integer
-smallestDivisor = todo
+smallestDivisor n = go 2
+    where 
+        go k
+            | n `mod` k == 0 = k
+            | otherwise = go (k+1) 
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement a function isPrime that checks if the given number
