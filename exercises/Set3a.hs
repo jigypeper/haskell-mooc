@@ -79,9 +79,12 @@ mapMaybe2 f (Just x) (Just y) = Just (f x y)
 palindromeHalfs :: [String] -> [String]
 palindromeHalfs xs = map firstHalf (filter palindrome xs)
 
-firstHalf = todo
+firstHalf x = 
+    if even (length x) 
+    then take ((length x) `div` 2) x 
+    else take (((length x) `div` 2) + 1) x   
 
-palindrome = todo
+palindrome x = if reverse x == x then True else False 
 
 ------------------------------------------------------------------------------
 -- Ex 5: Implement a function capitalize that takes in a string and
@@ -98,8 +101,11 @@ palindrome = todo
 -- Example:
 --   capitalize "goodbye cruel world" ==> "Goodbye Cruel World"
 
+capitalizeFirst :: String -> String
+capitalizeFirst x = [toUpper (head x)] ++ map toLower (tail x)
+
 capitalize :: String -> String
-capitalize = todo
+capitalize s = intercalate " " $ map capitalizeFirst (words s)
 
 ------------------------------------------------------------------------------
 -- Ex 6: powers k max should return all the powers of k that are less
