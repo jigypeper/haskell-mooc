@@ -79,11 +79,13 @@ mapMaybe2 f (Just x) (Just y) = Just (f x y)
 palindromeHalfs :: [String] -> [String]
 palindromeHalfs xs = map firstHalf (filter palindrome xs)
 
+firstHalf :: String -> String
 firstHalf x = 
     if even (length x) 
     then take ((length x) `div` 2) x 
     else take (((length x) `div` 2) + 1) x   
 
+palindrome :: String -> Bool
 palindrome x = if reverse x == x then True else False 
 
 ------------------------------------------------------------------------------
@@ -122,7 +124,7 @@ capitalize s = intercalate " " $ map capitalizeFirst (words s)
 --   * the function takeWhile
 
 powers :: Int -> Int -> [Int]
-powers k max = todo
+powers k max = todo 
 
 ------------------------------------------------------------------------------
 -- Ex 7: implement a functional while loop. While should be a function
