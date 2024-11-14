@@ -170,7 +170,9 @@ while check update value
 -- Hint! Remember the case-of expression from lecture 2.
 
 whileRight :: (a -> Either b a) -> a -> b
-whileRight check x = todo
+whileRight check x = case (check x) of 
+    Left x -> x
+    Right x -> whileRight check x
 
 -- for the whileRight examples:
 -- step k x doubles x if it's less than k
