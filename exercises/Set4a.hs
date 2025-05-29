@@ -101,7 +101,14 @@ rangeOf xs = last sorted - head sorted where sorted = sort xs
 --   longest [[1,2,3],[4,5],[6]] ==> [1,2,3]
 --   longest ["bcd","def","ab"] ==> "bcd"
 longest :: Ord a => [[a]] -> [a]
-longest (x:xs) = todo 
+-- longest xs = head $ sortBy (\a b -> flip compare (length a) (length b) ) xs
+longest [] = error "Empty list"
+longest [x] = x
+longest (x:y:xs)
+    | (head x == head y)  && (length x >= length y) = longest (x:xs)
+    | (head x > head y) && (length x == length y) = longest (y:xs)
+    | length x >= length y = longest (x:xs)
+    | otherwise = longest (y:xs)  
 
 ------------------------------------------------------------------------------
 -- Ex 6: Implement the function incrementKey, that takes a list of
