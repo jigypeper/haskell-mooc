@@ -139,8 +139,13 @@ incrementKey k l = [(x, if x == k then y+1 else y) | (x, y) <- l]
 -- Hint! you can use the function fromIntegral to convert the list
 -- length to a Fractional
 
+total :: Fractional x => [x] -> x
+total [] = error "empty list"
+total [x] = x
+total (x:xs) = x + total xs 
+
 average :: Fractional a => [a] -> a
-average xs = todo
+average xs = total xs / fromIntegral (length xs)
 
 ------------------------------------------------------------------------------
 -- Ex 8: given a map from player name to score and two players, return
