@@ -162,9 +162,19 @@ average xs = total xs / fromIntegral (length xs)
 --     ==> "Lisa"
 --   winner (Map.fromList [("Mike",13607),("Bob",5899),("Lisa",5899)]) "Lisa" "Bob"
 --     ==> "Lisa"
+compareScores :: [(String, Int)] -> String
+compareScores [] = error "empty list"
+compareScores [(x, _)] = x
+compareScores [(x1, y1),(x2, y2)]
+    | y1 > y2 = x1
+    | y2 > y1 = x2
+    | otherwise = x1  
 
 winner :: Map.Map String Int -> String -> String -> String
-winner scores player1 player2 = todo
+winner scores player1 player2 =
+    let x = Map.findWithDefault  0 player1 scores
+        y = Map.findWithDefault 0 player2 scores
+    in compareScores [(player1, x), (player2, y)]
 
 ------------------------------------------------------------------------------
 -- Ex 9: compute how many times each value in the list occurs. Return
